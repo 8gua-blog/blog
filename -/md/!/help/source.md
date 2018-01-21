@@ -7,7 +7,7 @@
 
 文章的题目是[《二进位算数的阐述——关于用0与1兼论其用处及伏羲氏所用数字的意义》](//i8gua.gitee.io/-/S/pdf/XsGes7R8n_CDaUscRh0HAe4QK4S4f7mRSP_aPg.pdf)（Explication de l’arithm ique binaire, que se sert desseuls carateres 0 et 1, avec des remarques sur son utility et sur ce qu’elle donne le sens desanciennes figures Chinois de FOHY）。
 
-![cc8d746c46ce9237ed0071298db359298b3cf85b.jpg](//i8gua.gitee.io/-/S/jpg/U7NlTXYV172t-7uLppxE0DtYlw27U6-PqAj2gQ.jpg)
+![cc8d746c46ce9237ed0071298db359298b3cf85b.jpg](//i8gua.gitee.io/i8gua-img/U7NlTXYV172t-7uLppxE0DtYlw27U6-PqAj2gQ.jpg)
 
 法国《皇家科学院院刊》（Histoire de l’Academie Royale des Sciences）于1703年5月5日收到这篇稿子，1705年将其发表。
 
@@ -40,4 +40,4 @@
 
 太极阴阳，动静结合，很适合活在量子叠加态中的我。
 
-![150448940278434.png](//i8gua.gitee.io/-/S/png/INv7njWdpWdkn7aMw_y4lAuAn5MDeBa92LErVw.png)
+![150448940278434.png](//i8gua.gitee.io/i8gua-img/INv7njWdpWdkn7aMw_y4lAuAn5MDeBa92LErVw.png)
