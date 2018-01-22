@@ -43,11 +43,13 @@
 
 源码地址
 
-*   码云 : [https://gitee.com/i8gua/](https://gitee.com/i8gua/)  
+*   码云 : [https://gitee.com/i8gua](https://gitee.com/i8gua/)
     
-*   GITHUB : [https://github.com/8gua-blog](https://github.com/8gua-blog)  
+*   GITHUB : [https://github.com/8gua-blog](https://github.com/8gua-blog)
     
 
 ## 联系方式
 
 邮箱 : [i@8gua.blog](mailto:i@8gua.blog)
+
+问题反馈 : [https://github.com/i8gua/i8gua.github.io/issues](https://github.com/i8gua/i8gua.github.io/issues)
