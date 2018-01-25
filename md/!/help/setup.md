@@ -54,7 +54,7 @@ npm install -g 8gua
 另外需要用守护进程启动后台服务
 
 ```
-8gua run
+8gua run 
 ```
 
 ## 8gua 命令用法
