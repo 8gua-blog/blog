@@ -1,1 +1,0 @@
-../../md/help/log.md
