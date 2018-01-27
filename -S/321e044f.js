@@ -1,0 +1,1 @@
+webpackJsonp([4],{uoHJ:function(t,o,e){"use strict";t.exports=function(t,o,e){var n;return n=$('<a href="/edit/'+t+'.md" class="I I-edit PboxIco" style="font-size:24px;bottom:11px;right:8px;top:auto;"></a>').click(function(){e()}),o.append(n)}}});
