@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>八卦博客</title>
+<subtitle>字符构建的时空</subtitle>
+<id>ent: *</id>
+<link rel="alternate" type="text/html" href="ent: *"/>
+<link rel="self" type="application/atom+xml" href="ent: */-/rss.xml"/>
+<updated>2018-02-01T13:57:55Z</updated>
+<entry><id>-/dev/2018-01-31</id>
+<link rel="alternate" type="text/html" href="ent: */-/dev/2018-01-31.htm" />
+<title>整合了python和bash的神器 — xonsh</title>
+<published>2018-02-01T13:57:55Z</published>
+<updated>2018-02-01T13:57:55Z</updated>
+<content type="html" xml:base="ent: *"><![CDATA[<h1>整合了python和bash的神器 — xonsh</h1><h2 id="xonsh">xonsh</h2>
+<p>Python-powered, cross-platform, Unix-gazing shell <a href="http://xon.sh">http://xon.sh</a></p>
+<h2 id="-">演示代码</h2>
+<p>比如我最近写了这样一个python+bash的脚本。</p>
+<pre><code>#!/usr/bin/env xonsh
+
+import re
+from os.path import dirname, join, abspath, exists, basename
+from json import load, dump
+import toml
+import sys
+
+__dirname = dirname(abspath(__file__))
+sys.path.append(__dirname)
+from dnspod import Dnspod
+from config import CONFIG
+
+VERSION_INCR = 1
+
+def main():
+
+    root = dirname(dirname(__dirname))
+    version_toml_path = join(root, &#39;.release.version.toml&#39;)
+    package_path = join(
+        root,
+        &quot;package.json&quot;
+    )
+
+    release_path = join(dirname(root), &quot;release/srv&quot;)
+
+    if not exists(release_path):
+        print(release_path, &#39;不存在&#39;)
+        return
+
+    cd @(root)
+    git add -u
+
+    try:
+        version_toml = toml.load(version_toml_path)
+    except:
+        version_toml = {}
+
+    if re.findall(&quot;nothing.* to commit&quot;, $(git st), re.S):
+        last_commit = $(git log -1).split(&quot;\n&quot;,1)[0].split(&quot; &quot;,1)[-1]
+        if last_commit in version_toml:
+            print(f&quot;commit {last_commit} released version {version_toml[last_commit]}&quot;)
+            return
+
+    with open(package_path) as f:
+        package = load(f)
+        version = package[&#39;version&#39;]
+        version = list(map(int, version.split(&quot;.&quot;)))
+        version[-1]+=VERSION_INCR
+        version = &quot;.&quot;.join(map(str, version))
+        package[&#39;version&#39;] = version
+
+    with open(package_path,&quot;w&quot;) as f:
+        dump(package, f, indent=4, sort_keys=True)
+
+    comment = f&quot;PUBLISH VERSION {version}&quot;
+
+    print(comment)
+
+
+    cd @(release_path)
+    find . | grep -vE &#39;\.git/|.git$|\.$|\.\.$&#39; | xargs rm -rf
+
+    cd @(root)
+    print(f&quot;&amp;gt;&amp;gt; cd {root}&quot;)
+    git add -u
+    git commit -m @(comment)
+    last_commit = $(git log -1).split(&quot;\n&quot;,1)[0].split(&quot; &quot;,1)[-1]
+
+    git archive master | tar -x -C @(release_path)
+
+    print(f&quot;&amp;gt;&amp;gt; cd {release_path}&quot;)
+    cd @(release_path)
+
+    rm -rf nodemon.json .gitignore dev py *.md test LICENSE release.sh
+    git add .
+
+    gitignore = join(root, &quot;.gitignore&quot;)
+    cp @(gitignore) .
+    git add .gitignore
+
+    git commit -m @(comment)
+    git push origin master
+    git push github master
+
+    version_toml[last_commit] = version
+
+    with open(version_toml_path, &quot;w&quot;) as f:
+        toml.dump(version_toml, f)
+
+    dnspod_update(version)
+
+def dnspod_update(version):
+    domain = CONFIG.HOST.TXT
+    dnspod = Dnspod(*CONFIG.DNSPOD)
+    dnspod.update(domain, &quot;cli-v&quot;, version)
+    dnspod.update(domain, &quot;cli-git&quot;, &quot; &quot;.join(CONFIG.GIT))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>]]></content>
+</entry></feed>
